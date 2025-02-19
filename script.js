@@ -1,14 +1,34 @@
 const app = document.getElementById("app")
+const users = [
+    {
+        email: 'test@test.com',
+        phone: '9999999999999',
+        ref: 188,
+        refBy: null
+    },
+    {
+        email: 'test2@test.com',
+        phone: '9999999999999',
+        ref: 200,
+        refBy: 100
+    }
+]
+
+const getUsers = (userData) => {
+    return users.find()
+}
 
 const formAction = () => {
     const form = document.getElementById('form')
     form.onsubmit = (event) => {
         event.preventDefault()
-        const email = form.elements.email.value
-        const phone = form.elements.phone.value
-        console.log(email, phone)
+        const formData = new FormData(form)
+        const userData = {
+            email: formData.get('email'),
+            phone: formData.get('phone'),
+        }
     }
-} 
+}
 const startApp = () => {
     const content = `
         <form id="form">
