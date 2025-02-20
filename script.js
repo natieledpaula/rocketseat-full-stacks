@@ -13,6 +13,12 @@ const users = [
         phone: '9999999999999',
         ref: 200,
         refBy: 100
+    },
+    {
+        email: 'tost@tost.com',
+        phone: '9999999999999',
+        ref: 300,
+        refBy: 200
     }
 ]
 
@@ -31,11 +37,40 @@ const getTotalSubscribe = (userData) => {
 
 const showInvite = (userData) => {
     app.innerHTML = `
-        <input type="text" id="link" value="https://evento.com/${userData.ref}" disabled>
-    <div id="stats">
-        <h4>88</h4>
-        <p>Inscrições feitas!</p>
-    </div> `
+        <main>
+                <h3>Inscrições confirmada!</h3>
+                <p>
+                    Convide mais pessoas e concorra a prêmios! <br>
+                    Compartilhe o link e acompanhe as inscrições:
+                </p>
+
+                <div class="input-group">
+                    <label for="link">
+                        <img src="link.svg" alt="Link icon">
+                    </label>
+                    <input type="text" id="link" value="https://evento.com/${userData.ref}" disabled>
+                </div>
+            </main>
+            <section class="stats">
+                <h4>${getTotalSubscribe(userData)}</h4>
+                <p>
+                    Inscrições feitas
+                </p>
+            </section>`
+
+    updateImageLinks()
+}
+
+const saveUser = (userData) => {
+    const newUser = {
+        ...userData,
+        ref: Math.round(Math.random() * 4000),
+        refBy: 100
+    }
+
+    users.push(newUser)
+    console.log(users)
+    return newUser
 }
 
 const formAction = () => {
@@ -50,23 +85,69 @@ const formAction = () => {
 
         const user = getUsers(userData)
         if (user) {
-            alert('Usuário já cadastrado')
+            showInvite(user)
         } else {
-            alert('Usuário cadastrado com sucesso')
+            const newUser = saveUser(userData)
+            showInvite(newUser)
         }
     }
 }
+
+const updateImageLinks = () => {
+    document.querySelectorAll('img').forEach((img) => {
+        const src = img.getAttribute('src')
+        if(img.src.includes('githubusercontent')) {
+            return
+        }
+        img.src = `https://raw.githubusercontent.com/maykbrito/my-public-files/main/nlw-19/${src}`
+    })
+}
 const startApp = () => {
     const content = `
-        <form id="form">
-            <input type="email" name="email" placeholder="E-mail" />
-            <input type="text" name="phone" placeholder="Telefone" />
-            <button>Confirmar</button>
-        </form>
+            <main>
+                <section class="about">
+                    <div class="about-header">
+                        <h2>Sobre o evento</h2>
+                        <span class="badge">AO VIVO</span>
+                    </div>
+                    <p>
+                        Um evento exclusivo para desenvolvedoras apaixonadas por criar soluções inovadoras
+                        compartilhar conhecimento. Vamos mergulhar nas tendencias mais recentes em desenvolvimento de 
+                        software, arquitetura de sistemas e tecnologias emergentes, com palestras, workshops e hackathons.
+                        <br> <br>
+                        Dias 15 a 17 de março | Das 18h ás 21h | Online e Gratuito
+                    </p>
+                </section>
+
+                <section class="registration">
+                    <h2>Inscrição</h2>
+                    <form id="form">
+                        <div class="input-wrapper">
+                            <div class="input-group">
+                                <label for="email">
+                                    <img src="mail.svg" alt="Email icon">
+                                </label>
+                                <input type="email" name="email" id="email" placeholder="E-mail">
+                            </div>
+                            <div class="input-group">
+                                <label for="phone">
+                                    <img src="phone.svg" alt="Phone icon">
+                                </label>
+                                <input type="text" name="phone" id="phone" placeholder="Telefone">
+                            </div>
+                        </div>
+                        <button>Confirmar
+                            <img src="arrow.svg" alt="Arrow right">
+                        </button>
+                    </form>
+                </section>
+            </main>
         `
     
     app.innerHTML = content
-
+    updateImageLinks()
     formAction()
 }
 startApp()
+
+document.getElementById(logo).onclick = () => startApp()
