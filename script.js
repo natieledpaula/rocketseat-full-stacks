@@ -58,6 +58,7 @@ const showInvite = (userData) => {
                 </p>
             </section>`
 
+    app.setAttribute('class', 'invite')
     updateImageLinks()
 }
 
@@ -145,9 +146,10 @@ const startApp = () => {
         `
     
     app.innerHTML = content
+    app.setAttribute('class', 'page-start')
     updateImageLinks()
     formAction()
 }
 startApp()
 
-document.getElementById(logo).onclick = () => startApp()
+document.querySelector("header").onclick = () => startApp()
