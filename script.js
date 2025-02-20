@@ -1,13 +1,15 @@
 const app = document.getElementById("app")
+
+// array, vetor
 const users = [
     {
         email: 'test@test.com',
         phone: '9999999999999',
-        ref: 188,
+        ref: 100,
         refBy: null
     },
     {
-        email: 'test2@test.com',
+        email: 'tust@tust.com',
         phone: '9999999999999',
         ref: 200,
         refBy: 100
@@ -15,7 +17,25 @@ const users = [
 ]
 
 const getUsers = (userData) => {
-    return users.find()
+    return users.find((user) => {
+        return user.email == userData.email
+    })
+}
+
+const getTotalSubscribe = (userData) => {
+    const subs =  users.filter((user) => {
+        return user.refBy == userData.ref
+    })
+    return subs.length
+}
+
+const showInvite = (userData) => {
+    app.innerHTML = `
+        <input type="text" id="link" value="https://evento.com/${userData.ref}" disabled>
+    <div id="stats">
+        <h4>88</h4>
+        <p>Inscrições feitas!</p>
+    </div> `
 }
 
 const formAction = () => {
@@ -26,6 +46,13 @@ const formAction = () => {
         const userData = {
             email: formData.get('email'),
             phone: formData.get('phone'),
+        }
+
+        const user = getUsers(userData)
+        if (user) {
+            alert('Usuário já cadastrado')
+        } else {
+            alert('Usuário cadastrado com sucesso')
         }
     }
 }
