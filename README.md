@@ -42,7 +42,7 @@ Durante o NLW Connect, foram abordados temas como:
 
 ## 📸 Prévia do Projeto
 
-> Aqui você pode inserir um print da aplicação ou link para o GitHub Pages/Vercel/etc.
+(https://natieledpaula.github.io/rocketseat-full-stacks/)
 
 ## 💡 Quer participar da próxima?
 
