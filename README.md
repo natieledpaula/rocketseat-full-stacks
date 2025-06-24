@@ -42,9 +42,9 @@ nlw-connect/
 ├── style.css # Estilos e layout
 ├── script.js # Lógica e interações
 ├── assets/
-│ ├── logo.svg # Logotipo do projeto
-│ ├── background.jpg # Imagem de fundo
-│ └── icons/ # Ícones de redes e tecnologias
+│    ├── logo.svg # Logotipo do projeto
+│    ├── background.jpg # Imagem de fundo
+│    └── icons/ # Ícones de redes e tecnologias
 └── README.md # Documentação do projeto
 ```
 
